@@ -4,12 +4,10 @@ export const getJpYear = (date: Date): string => {
     result = Intl.DateTimeFormat("ja-JP-u-ca-japanese", {
       year: "2-digit",
       era: "long",
-    }).format(date);
-    const match = result.match(/^\D.+(元|\d+)/);
-    if (!match) {
-      throw Error();
-    }
-    result = match[0];
+    })
+      .format(date)
+      .slice(0, 4)
+      .replace(/年$/, "");
   } catch {
     result = "該当なし";
   }
